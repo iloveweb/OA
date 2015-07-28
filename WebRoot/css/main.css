@@ -1,0 +1,117 @@
+*{
+	border-radius: 2px;
+}
+body{
+	margin: 0 auto;
+	padding: 0;
+	width: 1000px;
+	height: 780px;
+	/*border: 1px red solid;*/
+	font: "微软雅黑";
+	background-color:#FFFFCE;
+	color: lemonchiffon;
+}
+#denglu{
+	margin: 0;
+	padding: 0;
+	width: 1000px;
+	height: 400px;
+	background-color:#BDFFFF;
+	color:black;
+}
+#zhuce_1{
+	margin: 0;
+	padding: 0;
+	width: 1000px;
+	height: 400px;
+	background-color:#BDFFFF;
+	color:black;
+}
+#header{
+	margin: 0;
+	padding: 0;
+	width: 1000px;
+	height: 100px;
+	/*background-color: red;*/
+	background-image: url(../img/logo.jpg);
+	background-repeat: no-repeat;
+	/* border:1px green solid; */
+}
+#header #login{
+	padding:40px 40px 0 0;
+	text-align:right;
+	color:black;
+	font-size:bold;
+	/* border:1px red solid; */
+}
+#header #nav{
+	margin: 40px 0 0 0;
+	padding: 0;
+	width: 1000px;
+	height: 20px;
+	/*background-color: black;*/
+	/* border: 1px red solid; */
+}
+#content{
+	margin: 75px 0 15px 0;
+	padding: 0;
+	width: 1000px;
+	height: 560px;
+	/* display: -moz-box; */
+	display: -webkit-box;
+	/* background-color: green; */
+}
+#tabs-1 ul,#tabs-2 ul,#tabs-3 ul,#tabs-4 ul,#tabs-5 ul,#tabs-6 ul,#tabs-7 ul{
+	margin: 0;
+	padding: 0;
+}
+#tabs-1{
+	display: none;
+}
+#tabs-1 ul li,#tabs-2 ul li,#tabs-3 ul li,#tabs-4 ul li,#tabs-5 ul li,#tabs-6 ul li,#tabs-7 ul li{
+	display: inline;
+	padding: 0 5px 2px 50px;
+}
+#tabs-1 ul li a,#tabs-2 ul li a,#tabs-3 ul li a,#tabs-4 ul li a,#tabs-5 ul li a,#tabs-6 ul li a,#tabs-7 ul li a{
+	color: white;
+	text-decoration: none;
+	cursor: hand;
+}
+#content #leftbar{
+	margin: 0;
+	padding: 0;
+	width: 250px;
+	height: 560px;
+	text-align: center;
+	background-color: lightblue;
+	/*float: left;*/
+}
+#content #empty{
+	width: 10px;
+}
+#content #rightbar{
+	margin: 0;
+	padding: 0;
+	width: 750px;
+	height: 560px;
+	background-color: lightblue;
+	-moz-box-flex: 1;
+	-webkit-box-flex: 1;
+	border-radius: 10px;
+	/*float: right;*/
+}
+#tail{
+	margin: 0;
+	padding: 0;
+	width: 1000px;
+	height: 50px;
+	background-color: gray;
+	text-align: center;
+	font-size: 14px;
+}
+.right{
+	display: none;
+}
+.ui-tabs .ui-tabs-panel{
+	padding:0.5em 1.4em;
+}

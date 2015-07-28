@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css"/>
+		<script src="js/oa.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/ajax.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#_zhuce,#_reset").button();
+			})
+			function validate_form(){    //注意验证的顺序
+				var str=document.form1.zhangh.value;
+				if (str=="") {
+					alert("账号不能为空");
+					return false;
+				}
+				if (getLength(str)<1||getLength(str)>50) {
+					alert("账号长度不合法");
+					return false;
+				}
+				if (document.form1.pws.value=="") {
+					alert("密码不能为空！");
+					return false;
+				}
+				if (!checkPassword(document.form1.pws.value)) {
+					alert("密码必须由3位字符组成");
+					return false;
+				}
+				if (document.form1.pws.value!=document.form1.pws1.value) {
+					alert("密码不一致！");
+					return false;
+				}
+				
+				if (document.form1.zhenshi.value=="") {
+					alert("真实姓名不能为空！");
+					return false;
+				}
+				if (document.form1.nc.value=="") {
+					alert("用户昵称不能为空！");
+					return false;
+				}
+				if (document.form1.mail.value=="") {
+					alert("电子邮件不能为空！");
+					return false;
+				}
+				if (!checkEmail(document.form1.mail.value)) {
+					alert("邮箱格式不合法");
+					return false;
+				}
+				if (document.form1.shouj.value=="") {
+					alert("手机号不能为空！");
+					return false;
+				}
+				if (!checkPhone(document.form1.shouj.value)) {
+					alert("手机号必须是11位数字");
+					return false;
+				}
+			}
+			function reg () {
+				if (validate_form()==false) {
+					return false;
+				}     
+				validate();
+			}
+			var xhr=creatXHR();  //注意必须将xhr作为外部变量，不能在validate内部申明
+		    function validate () {
+		    	var zhangh=document.getElementById("zhangh").value;
+		    	var pws=document.getElementById("pws").value;
+		    	var zhenshi=document.getElementById("zhenshi").value;
+		    	var nc=document.getElementById("nc").value;
+		    	var gang=document.getElementById("gangw");
+		    	var gangw=gang.options[gang.selectedIndex].text;
+		    	var bu=document.getElementById("bum");
+		    	var bum=bu.options[gang.selectedIndex].text;
+		    	var mail=document.getElementById("mail").value;
+		    	var shouj=document.getElementById("shouj").value;
+		    	var phone=document.getElementById("phone").value;
+		    	var zhu=document.getElementById("zhu").value;
+		    	var str="zhangh="+zhangh+"&pws="+pws+"&zhenshi="+zhenshi+"&nc="+nc+"&gangw="+gangw+"&bum="+bum+"&mail="+mail+"&shouj="+shouj+"&phone="+phone+"&zhu="+zhu;
+		    	var url="zhuce.jsp?"+str;
+		    	xhr.open("get",url,true);
+		    	xhr.onreadystatechange=callback;
+		    	//xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		    	xhr.send(null);
+		    }
+		    var i=1;
+		    function callback(){
+	      	    if (xhr.readyState==4) {
+					  if ((xhr.status>=200&&xhr.status<300)||xhr.status==304) {
+					     var data=xhr.responseText;
+					     data=trim(data).charAt(0);
+					     if (data=="1") {
+					     	alert("注册成功！");
+					     	top.location.href="login.html";
+					     	document.getElementById("_zhuce").disabled=true;
+					     }
+					     else{
+					        alert("账号已存在！");
+					     }
+					  }else{
+					     alert("Request was unsuccessful:"+xhr.status);
+					  }
+	    		}
+      		}
+      		
+		</script>
+	</head>
+	<body >
+	<div id="header">
+		<div id="login"><a href="login.html">登录</a> |<a href="zhuce.html"> 注册</a></div>
+	</div>
+	<div id="zhuce_1">
+		<h1 align="center">欢迎来到用户注册系统</h1>
+       	<form action="" name="form1" method="" >
+       		<table align="center" border="1" cellspacing="1" cellpadding="1" width="80%">
+       			<tr align="center"><td colspan="4">填写个人信息</td></tr>
+       			<tr>
+       				<td width="11%">账号：</td>
+       				<td width="39%"><input type="text" name="zhangh" id="zhangh" onchange="check()"></td>
+       				<td width="11%">密码：</td>
+       				<td width="39%"><input type="password" name="pws" id="pws"></td>
+       			</tr>
+       			<tr>
+       				<td width="11%">确认密码：</td>
+       				<td width="39%"><input type="password" name="pws1"> </td>
+       				<td width="11%">真实姓名：</td>
+       				<td width="39%"><input type="text" name="zhenshi" id="zhenshi"></td>
+       			</tr>
+       			<tr>
+       				<td width="11%">昵称：</td>
+       				<td width="39%"><input type="text" name="nc" id="nc"></td>
+       				<td width="11%">岗位：</td>
+       				<td width="39%">
+       					<select name="gangw" id="gangw">
+       						<option>总经理</option>
+       						<option>副总经理</option>
+       						<option>主任</option>
+       						<option>秘书</option>
+       						<option>经理</option>
+       						<option>工程师</option>
+       						<option>会计</option>
+       						<option>出纳</option>
+       						<option>业务员</option>
+       						<option>管理员</option>
+       					</select>
+       				</td>
+       			</tr>
+       			<tr>
+       				<td width="11%">部门：</td>
+       				<td width="39%">
+       					<select name="bum" id="bum">
+       						<option>经理办</option>
+       						<option>办公室</option>
+       						<option>生产部</option>
+       						<option>财务部</option>
+       						<option>市场部</option>
+       						<option>信息中心</option>
+       					</select>
+       				</td>
+       				<td width="11%">电子邮件：</td>
+       				<td width="39%"><input type="text" name="mail" id="mail"></td>
+       			</tr>
+       			<tr>
+       				<td width="11%">手机：</td>
+       				<td width="39%"><input type="text" name="shouj" id="shouj"></td>
+       				<td width="11%">办公电话：</td>
+       				<td width="39%"><input type="text" name="phone" id="phone"></td>
+       			</tr>
+       			<tr>
+       				<td width="11%">家庭住址：</td>
+       				<td width="39%"><input type="text" name="zhu" id="zhu"></td>
+       			</tr>
+       		</table><br><hr>
+       		<div align="center">
+	       		<input type="button"  value="注册" id="_zhuce" onclick="reg()"/>
+	       		<input type="reset" id="_reset" value="重置"/>
+       		</div>
+       	</form> 
+    </div>
+	</body>
+</html>
